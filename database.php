@@ -18,5 +18,7 @@ require_once 'config.php';
     $result['objects'] = $arrResults;
     return json_encode($result);
   }
-
+/*
+ * sanitize insert operation
+ * */
 ?>

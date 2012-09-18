@@ -4,7 +4,7 @@
   $con = connectdb();
   $type = $_REQUEST['type'];
   if($type){
-    sleep(10);
+    sleep(3);
     $where = 'type = ' . $type;
     echo select_query('*', $where);
   }
