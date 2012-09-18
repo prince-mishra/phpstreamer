@@ -1,0 +1,168 @@
+/* CSS Document */
+* {
+  outline: none;
+}
+body {
+  background: #111;
+  font: 33px Helvetica, Arial, sans-serif;
+  letter-spacing: -3px;
+  margin: 8px;
+  margin-left: 0px;
+  overflow: hidden;
+}
+html {
+  overflow: hidden;
+}
+.hide {
+	display:none;
+}
+#topics {
+  position: absolute;
+  left: 0;
+  top: 120px;
+  width: 250px;
+}
+h1 {
+bottom:198px;
+color:#FFFFFF;
+font-size:36px;
+letter-spacing:-2px;
+margin:0px 0px 0px 14px;
+position:absolute;
+text-decoration:none;
+width:200px;
+}
+h2 {
+  position: relative;
+  z-index: 1;
+  font-size: 63px;
+  line-height: 59px;
+  overflow: hidden;
+  font-weight: bold;
+  margin: 0;
+  padding-left: 14px;
+  cursor: pointer;
+  width: 200px;
+}
+h2.selected {
+  color: #fff;
+}
+h2 span {
+  padding-left: 2px;
+  padding-right: 6px;
+}
+#credits {
+  position: absolute;
+  left: 14px;
+  bottom: 80px;
+  width: 150px;
+  font-size: 14px;
+  line-height: 15px;
+  letter-spacing: -1px;
+  text-transform: lowercase;
+  color: #fff;
+  z-index: 1;
+}
+#itemsWrapper {
+	width:100%;
+	position:absolute;
+	padding-left:200px;
+}
+#items {
+  position:relative;
+  top: 500px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  padding-right:200px;
+}
+#items li {
+  color: #5c5c5c;
+  font-size: 18px;
+  line-height: 18px;
+  letter-spacing: 0px;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+  padding-right: 20px;
+  overflow: hidden;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  white-space: -o-pre-wrap;
+  white-space: -moz-pre-wrap;
+}
+#items li div.tweet-wrapper {
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+#items li span.large {
+  font-size: 36px;
+  line-height: 32px;
+  letter-spacing: -2px;
+}
+#items li em {
+  font-style: normal;
+  font-size: 56px;
+  line-height: 56px;
+  letter-spacing: -3px;
+  font-weight: bold;
+}
+
+.veg { color: #a839b2 }
+.veg.selected span { background-color: #a839b2 }
+#items li.veg em { color: #a839b2 }
+
+.nonveg { color: #ff0071 }
+.nonveg.selected span { background-color: #ff0071 }
+#items li.nonveg em { color: #ff0071 }
+
+.satire { color: #acd030 }
+.satire.selected span { background-color: #acd030 }
+#items li.satire em { color: #acd030 }
+
+.political { color: #58aa00 }
+.political.selected span { background-color: #58aa00 }
+#items li.political em { color: #58aa00 }
+
+
+.recent { color: #00aa78 }
+.recent.selected span { background-color: #00aa78 }
+#items li.recent em { color: #00aa78 }
+
+.random { color: #0074ae }
+.random.selected span { background-color: #0074ae }
+#items li.random em { color: #0074ae }
+
+#newb { 
+	position:absolute; 
+	background-color:#abc; 
+	left:50px;
+	width:90px; 
+	height:90px;
+	margin:5px; 
+}
+#extblock {
+position:relative;
+}
+#logo {
+	margin-bottom:-25px;
+	text-decoration: None !important;
+    color: #A9FFC4 !important;
+    font-size:0.9em;
+}
+
+#loader {
+	margin-left:14px;
+}
+#new_post {
+	position:absolute;
+	bottom:10px;
+	letter-spacing: 0;
+	left:14px;
+	z-index:1;
+}
+textarea {
+    resize: none;
+    height:200px;
+    width:95%;
+}
