@@ -5,7 +5,7 @@
 body {
   background: #111;
   font: 33px Helvetica, Arial, sans-serif;
-  letter-spacing: -3px;
+  /*letter-spacing: -3px;*/
   margin: 8px;
   margin-left: 0px;
   overflow: hidden;
@@ -20,7 +20,8 @@ html {
   position: absolute;
   left: 0;
   top: 120px;
-  width: 250px;
+  width: 200px;
+  z-index:2;
 }
 h1 {
 bottom:198px;

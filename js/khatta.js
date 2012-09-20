@@ -168,8 +168,11 @@ KC.streamer = {
 		diff += 200;
 		$('#items').animate({"top": "-=" + diff + "px"}, 1500);
 		KC.streamer.totalHeightScrolled += diff;
+	},
+	kill : function() {
+		/*
+		 * remove streamer completely. hide html elements, remove animations etc.
+		 */
+		KC.streamer.pauseAnimationWrapper();
 	}
 }
-$(document).ready(function(){
-	KC.streamer.init();
-});
