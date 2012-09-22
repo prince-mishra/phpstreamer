@@ -20,7 +20,7 @@ KC.streamer = {
 	init : function() {
 		KC.streamer.animateTopics();
 		KC.streamer.bindevents();
-		KC.streamer.reload(KC.streamer.firstTopic);
+		KC.url.updateUrl({'action':'reload'});// triggers hashchange. Every init function shoulf have one
 	},
 	animateTopics : function() {
 		$("#topics h2").animate({fontSize:"43px",lineHeight:"45px"},{duration:1000});
@@ -29,6 +29,7 @@ KC.streamer = {
 		$('#activeloader').show();
 		$('#stoppedloader').hide();
 		$("#waiting").modal("hide");
+		$('#controls').hide();
 		/*
 		 * need to clear earlier setInterval if it exists
 		 */
@@ -49,31 +50,40 @@ KC.streamer = {
 			$('#topics h2').removeClass('selected');
 			self.addClass('selected');
 			var query = parseInt(self.attr('query'));
-			//KC.streamer.pauseAnimationWrapper();
 			KC.streamer.flushQueue();
-			KC.streamer.reload(query);
+			KC.url.updateUrl({'action':'reload', 'query': query});
+			//KC.streamer.reload(query);
 		});
 		$('#next').click(function(){
 			var item = $('#paginator input[name="curpage"]');
-			var curpage = item.val();
-			var nextpage = KC.streamer.nextPage(curpage);
+			var curpage = parseInt(item.val());
+			var nextpage = curpage + 1;
 			item.val(nextpage);
-			KC.streamer.log(nextpage);
+			KC.streamer.flushQueue();
+			KC.url.updateUrl({'pageno' : nextpage, 'animate':0});
 		});
-
+		$('#previous').click(function(){
+			var item = $('#paginator input[name="curpage"]');
+			var curpage = parseInt(item.val());
+			var nextpage = curpage - 1;
+			item.val(nextpage);
+			KC.streamer.flushQueue();
+			KC.url.updateUrl({'pageno' : nextpage, 'animate':0});
+		});
 		$('#items').delegate('li', 'click', function(){
 			KC.streamer.pauseAnimationWrapper(true);
 		});
 		$('#activeloader').click(function(){
-			KC.streamer.pauseAnimationWrapper(true);
+			KC.streamer.pauseAnimationWrapper();
+			$('#controls').show('slow');
 		});
 		$('#stoppedloader').click(function(){
-			KC.streamer.startAnimationWrapper();
+			$('#controls').hide('slow');
+			KC.streamer.flushQueue();
+			KC.url.updateUrl({'animate' : 1});
 		});
 	},
-	rotate : function() {
-		$('#items').animate({"top": "-=80px"}, 500);
-		KC.streamer.totalHeightScrolled += 80; 
+	_rotate : function() {
 		var curcounter = $('#paginator input[name="curcount"]');
 		var curval = curcounter.val();
 		var diff = KC.streamer.totalHeightAdded-KC.streamer.totalHeightScrolled;
@@ -82,19 +92,41 @@ KC.streamer = {
 		if (condition===true && KC.streamer.totalAdded > 0) {
 			var curtopic = KC.streamer.getTopic();
 			var nextTopic = (curtopic % KC.streamer.totalTopics) + 1;
-			
-			KC.streamer.reload(nextTopic);
-			
+			KC.url.updateUrl({'action':'reload', query:nextTopic});
 		}
 		else {
 			var newval = parseInt(curval)-1;
 			curcounter.val(newval);
 		}
 	},
+	rotate : function() {
+		$('#items').animate({"top": "-=80px"}, 500);
+		KC.streamer.totalHeightScrolled += 80; 
+		KC.streamer._rotate();
+	},
+	rotateUp : function() {
+		var window_height = parseInt($(window).height());
+		var items_top = parseInt($('#items').offset()['top']);
+		if ((window_height - items_top) > 10) {
+			$('#items').css({"top": "-=80px"});
+			KC.streamer.totalHeightScrolled += 80; 
+			KC.streamer._rotate();
+		}
+		
+	},
+	rotateDown : function() {
+		var window_height = parseInt($(window).height());
+		var items_top = parseInt($('#items').offset()['top']);
+		if ((window_height - items_top) > 100) {
+			$('#items').css({"top": "+=80px"});
+			KC.streamer.totalHeightScrolled -= 80; 
+			KC.streamer._rotate();
+		}
+	},
 	log : function(message) {
 		// ajax this to logger
 	},
-	reload : function(topic) {
+	reload : function(topic, animate) {
 		if(typeof topic === 'undefined') {
 			var topic = 1 // stands for veg 
 		}
@@ -104,7 +136,7 @@ KC.streamer = {
 		var cssclass = KC.streamer.topicMap[topic];
 		var rand = Math.floor(Math.random()*1000);
 		//var url = '/stream/' + topic + '/get?q=' + rand;
-		var url = window.location.href + 'ajax.php?type=1';
+		var url = window.location.origin + window.location.pathname + 'ajax.php?type=1';
 		KC.streamer.pauseAnimationWrapper();
 		KC.streamer.totalAdded = 0;
 		$.getJSON(url, function(json){
@@ -122,7 +154,13 @@ KC.streamer = {
 			});
 			$("#items").append(str);
 			KC.streamer.totalAdded = count;
-			setTimeout(KC.streamer.startAnimationWrapper,1);
+			if (parseInt(animate) === 0 ) {
+				$("#waiting").modal('hide');
+				$('#controls').show();
+			}
+			else {
+				setTimeout(KC.streamer.startAnimationWrapper,1);
+			}
 			var newHeight = $('#items').height();
 			KC.streamer.totalHeightAdded += (newHeight - oldHeight);
 			var $lastItem = $('#items li:last');

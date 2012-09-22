@@ -20,6 +20,18 @@ KC.operations = {
 				    {maxWidth: 600}
 				);
 		}
+	},
+	
+	reload : function(urlobj) {
+		var query = urlobj['query'];
+		var animate = urlobj['animate'];
+		if (query === 'undefined')
+			query = 1;
+		if (KC.streamer['reload'] !== 'undefined') {
+			KC.streamer.reload(query, animate);
+		}
+		else {
+			alert("Reload not defined");
+		}
 	}
-
 }

@@ -17,8 +17,16 @@ $(document).ready(function(){
 	$('#loadphoto').click(function(){
 		loadphoto();
 	});
-	
-	urlobj = KC.url.getUrl();
+	$(window).hashchange(function(){
+		urlobj = KC.url.getUrl();
+		if (urlobj.hasOwnProperty('action') && urlobj['action'] !== '') {
+			if (typeof(KC.operations[urlobj['action']]) === 'function') {
+				KC.operations[urlobj['action']](urlobj);
+			}
+		}
+	});
+	$(window).trigger('hashchange');
+	/*urlobj = KC.url.getUrl();
 	if (urlobj.hasOwnProperty('action') && urlobj['action'] !== '') {
 		if (typeof(KC.operations[urlobj['action']]) === 'function') {
 			KC.operations[urlobj['action']](urlobj);
@@ -31,5 +39,6 @@ $(document).ready(function(){
 		//loadphoto();
 	}
 	//setTimeout(changehash,10);
-	
+	*/
+	loadstreamer();
 });

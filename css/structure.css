@@ -17,11 +17,7 @@ html {
 	display:none;
 }
 #topics {
-  position: absolute;
-  left: 0;
-  top: 120px;
-  width: 200px;
-  z-index:2;
+    margin-top:10px;
 }
 h1 {
 bottom:198px;
@@ -41,9 +37,7 @@ h2 {
   overflow: hidden;
   font-weight: bold;
   margin: 0;
-  padding-left: 14px;
   cursor: pointer;
-  width: 200px;
 }
 h2.selected {
   color: #fff;
@@ -53,10 +47,6 @@ h2 span {
   padding-right: 6px;
 }
 #credits {
-  position: absolute;
-  left: 14px;
-  bottom: 80px;
-  width: 150px;
   font-size: 14px;
   line-height: 15px;
   letter-spacing: -1px;
@@ -64,18 +54,18 @@ h2 span {
   color: #fff;
   z-index: 1;
 }
-#itemsWrapper {
+/*#itemsWrapper {
 	width:100%;
 	position:absolute;
 	padding-left:200px;
-}
+}*/
 #items {
   position:relative;
   top: 500px;
   list-style-type: none;
   margin: 0;
   padding: 0;
-  padding-right:200px;
+  /*padding-right:200px;*/
 }
 #items li {
   color: #5c5c5c;
@@ -152,9 +142,10 @@ position:relative;
     font-size:0.9em;
 }
 
-#loader {
+/*#loader {
 	margin-left:14px;
-}
+	width:150px;
+}*/
 #new_post {
 	position:absolute;
 	bottom:10px;
