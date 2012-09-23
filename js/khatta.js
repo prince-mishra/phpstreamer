@@ -57,32 +57,35 @@ KC.streamer = {
 			//KC.streamer.reload(query);
 		});
 		$('#next').click(function(){
-			var item = $('#paginator input[name="curpage"]');
+			/*var item = $('#paginator input[name="curpage"]');
 			var curpage = parseInt(item.val());
 			var nextpage = curpage + 1;
 			item.val(nextpage);
 			KC.streamer.flushQueue();
-			KC.url.updateUrl({'pageno' : nextpage, 'animate':0});
+			KC.url.updateUrl({'pageno' : nextpage, 'animate':0});*/
+			KC.streamer.rotateUp();
 		});
 		$('#previous').click(function(){
-			var item = $('#paginator input[name="curpage"]');
+			/*var item = $('#paginator input[name="curpage"]');
 			var curpage = parseInt(item.val());
 			var nextpage = curpage - 1;
 			item.val(nextpage);
 			KC.streamer.flushQueue();
-			KC.url.updateUrl({'pageno' : nextpage, 'animate':0});
+			KC.url.updateUrl({'pageno' : nextpage, 'animate':0});*/
+			KC.streamer.rotateDown();
 		});
 		$('#items').delegate('li', 'click', function(){
 			KC.streamer.pauseAnimationWrapper(true);
 		});
 		$('#activeloader').click(function(){
 			KC.streamer.pauseAnimationWrapper();
-			$('#controls').show('slow');
+			
 		});
 		$('#stoppedloader').click(function(){
 			$('#controls').hide('slow');
-			KC.streamer.flushQueue();
-			KC.url.updateUrl({'animate' : 1});
+			KC.streamer.startAnimationWrapper();
+			//KC.streamer.flushQueue();
+			//KC.url.updateUrl({'animate' : 1});
 		});
 	},
 	_rotate : function() {
@@ -138,18 +141,18 @@ KC.streamer = {
 		var cssclass = KC.streamer.topicMap[topic];
 		var rand = Math.floor(Math.random()*1000);
 		//var url = '/stream/' + topic + '/get?q=' + rand;
-		var url = window.location.origin + window.location.pathname + 'ajax.php?type=1';
+		var url = window.location.href.split('#')[0] + 'ajax.php?type=1';
 		KC.streamer.pauseAnimationWrapper();
 		KC.streamer.totalAdded = 0;
 		$.getJSON(url, function(json){
-			console.log(json);
 			var objects = json.objects;
+			console.log(objects);
 			var count = objects.length;
 			var oldHeight = $('#items').height();
 			$('#paginator input[name="curcount"]').val(count);
 			var str = '';
 			$.each(objects, function(i, v){
-				if(v.message.search("<a") == -1) {
+				if(v.message!=='' && v.message!=null && v.message.search("<a") == -1) {
 					var item = '<li class="' + cssclass + '" style="height:auto"><div class="tweet-wrapper"><span class="wish">"#KhattaCorp special"</span><br><em>' + displayText + '</em><span class="large">'+v.message+'</span></div></li><br />';
 					str += item;
 				}
@@ -184,6 +187,7 @@ KC.streamer = {
 	},
 	pauseAnimationWrapper : function(restart) {
 		if(KC.streamer.animationStopped === false) {
+			$('#controls').show('slow');
 			KC.streamer.animationStopped = true;
 			KC.streamer.stopAnimation();
 			if (restart === true) {
@@ -197,6 +201,7 @@ KC.streamer = {
 	startAnimationWrapper : function() {
 		if(KC.streamer.restartTimeout)
 			clearTimeout(KC.streamer.restartTimeout);
+		$('#controls').show('slow');
 		KC.streamer.startAnimation();
 		KC.streamer.animationStopped = false;
 	},

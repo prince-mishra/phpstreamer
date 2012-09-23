@@ -9,7 +9,9 @@ require_once 'config.php';
   function select_query($columns, $where) {
     global $table;
     $arrResults = Array();
-    $query = "select " . $columns . " from ". $table." where ". $where;
+    $begin = rand(1, 425);
+    $range = 15;
+    $query = "select " . $columns . " from ". $table." limit ". $begin. ','.$range;
     $result = mysql_query($query);
     while($row = mysql_fetch_assoc($result)){
       $arrResults[] = $row;
