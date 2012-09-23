@@ -1,7 +1,8 @@
 <?php
   require_once 'config.php';
+  //listdir();
   function listdir() {
-    global $images_dir, $thumbs_dir;
+    global $images_dir, $thumbs_dir, $thumbs_width;
     $exclude_list = array(".", "..");
     $image_files = array_diff(scandir($images_dir), $exclude_list);
     if(count($image_files)) {
@@ -28,6 +29,9 @@
     $ext = get_file_extension($src);
     switch($ext){
       case "jpeg":
+        $source_image = imagecreatefromjpeg($src); //jpeg file
+        break;
+      case "jpg":
         $source_image = imagecreatefromjpeg($src); //jpeg file
         break;
       case "gif":
