@@ -38,6 +38,7 @@ h2 {
   font-weight: bold;
   margin: 0;
   cursor: pointer;
+  letter-spacing : -3px;
 }
 h2.selected {
   color: #fff;
@@ -142,10 +143,9 @@ position:relative;
     font-size:0.9em;
 }
 
-/*#loader {
-	margin-left:14px;
-	width:150px;
-}*/
+#loader {
+	margin-top:10px;
+}
 #new_post {
 	position:absolute;
 	bottom:10px;
@@ -157,4 +157,22 @@ textarea {
     resize: none;
     height:200px;
     width:95%;
+}
+li.thumb {
+	list-style : none;
+	display:inline;
+	padding : 0 10px 10px 0;
+}
+li.thumb a.thumb_a {
+	border: solid 2px white;
+	display:inline-block;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	-moz-box-shadow: 0 0 8px rgba(0,0,0,.75);
+	-webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .75);
+	box-shadow: 0 0 8px rgba(0, 0, 0, .75);
+}
+#slideshow-btn {
+	margin-top:10px;
 }

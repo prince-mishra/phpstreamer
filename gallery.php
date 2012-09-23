@@ -17,7 +17,7 @@
             
           }
         }
-        $str = $str.'<a rel="gallery" href="'.$images_dir.$file.'" title=""><img src="'.$thumbnail_image.'" height="75px" width="75px;"></a>';
+        $str = $str.'<li class="thumb"><a rel="gallery" class="thumb_a" href="'.$images_dir.$file.'" title=""><img src="'.$thumbnail_image.'" height="75px" width="75px;"></a></li>';
       }
     }
     return $str;

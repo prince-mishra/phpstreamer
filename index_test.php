@@ -7,12 +7,13 @@
 <body>
 <ul>
 <?php
-for ($i=$_REQUEST['id']; $i<=10; $i++)
-  {?>
-  <li>
-  <?php echo "The number is " . $i ?>
-  </li>  
-<?php } ?>
+$link = mysql_connect('khattacorp.com:2082', 'khattaco_stream', 'stream');
+if (!$link) {
+  die('Could not connect: ' . mysql_error());
+}
+echo 'Connected successfully';
+mysql_close($link);  
+?>
 </ul>
 </body>
 </html>

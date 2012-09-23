@@ -3,25 +3,30 @@ if (typeof(KC.operations) === 'undefined') {
 }
 KC.operations = {
 	loadImage : function(urlobj) {
+		return false; // not supporting it for now.
 		if (window.loadImage === 'undefined') {
 			alert("loadImage not defined.");
 		}
+		else if ($('#modal-gallery').is(':visible') === false) {
+			this._loadImage(urlobj['url']);
+		}
 		else {
-			url = urlobj['url'];
-			window.loadImage(
-				    url,
-				    function (img) {
-				        if(img.type === "error") {
-				            console.log("Error loading image " + imageUrl);
-				        } else {
-				            document.body.appendChild(img);
-				        }
-				    },
-				    {maxWidth: 600}
-				);
+			return false;
 		}
 	},
-	
+	_loadImage : function(url) {
+		window.loadImage(
+			    url,
+			    function (img) {
+			        if(img.type === "error") {
+			            console.log("Error loading image " + imageUrl);
+			        } else {
+			            document.body.appendChild(img);
+			        }
+			    },
+			    {maxWidth: 600}
+			);
+	},
 	reload : function(urlobj) {
 		var query = urlobj['query'];
 		var animate = urlobj['animate'];

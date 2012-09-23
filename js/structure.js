@@ -26,6 +26,15 @@ $(document).ready(function(){
 		}
 	});
 	$(window).trigger('hashchange');
+	$('#switcher').button();
+	$('#photo').click(function(){
+		KC.streamer.kill();
+		KC.photo.init();
+	});
+	$('#streamer').click(function(){
+		KC.photo.kill();
+		KC.streamer.init();
+	})
 	/*urlobj = KC.url.getUrl();
 	if (urlobj.hasOwnProperty('action') && urlobj['action'] !== '') {
 		if (typeof(KC.operations[urlobj['action']]) === 'function') {

@@ -21,6 +21,8 @@ KC.streamer = {
 		KC.streamer.animateTopics();
 		KC.streamer.bindevents();
 		KC.url.updateUrl({'action':'reload'});// triggers hashchange. Every init function shoulf have one
+		$('.streamer').show('slow');
+		$('#items').show('slow');
 	},
 	animateTopics : function() {
 		$("#topics h2").animate({fontSize:"43px",lineHeight:"45px"},{duration:1000});
@@ -212,5 +214,11 @@ KC.streamer = {
 		 * remove streamer completely. hide html elements, remove animations etc.
 		 */
 		KC.streamer.pauseAnimationWrapper();
+		/*
+		 * animate and hide
+		 */
+		$('.streamer').hide('slow');
+		$('#items').hide();
+		
 	}
 }

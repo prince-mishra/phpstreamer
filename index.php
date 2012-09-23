@@ -31,11 +31,15 @@
         <div id="likebox">
             <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Ffacebook.com%2Fkhattacorp&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=400456929993058" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px; padding:10px;" allowTransparency="true"></iframe>
         </div>
-        <div id="loader">
+        <div id="switcher" class="btn-group" data-toggle="buttons-radio">
+          <button id="streamer" type="button" class="btn btn-primary active">Streamer</button>
+          <button id="photo" type="button" class="btn btn-primary">Photo</button>
+        </div>
+        <div id="loader" class="streamer">
             <img id="activeloader" src="images/82.gif"/>
             <img id="stoppedloader" src="images/stopped.png" class="hide"/>
         </div>
-        <div id="controls" class="hide">
+        <div id="controls" class="streamer hide">
           <a class="btn btn-info modal-prev" id="previous">
 	            <i class="icon-arrow-left icon-white"></i>
 	            <span>Previous</span>
@@ -51,15 +55,18 @@
               <input type="hidden" name="pagesize" value="15" />
             </div>
         </div>
-        <div id="topics">
-          <h2 class="veg selected" query="1" title="Veg"><span>Veg</span></h2> 
-          <h2 class="nonveg" query="2" title="Non Veg"><span>NonVeg</span></h2> 
+        <div id="topics" class="streamer">
+          <h2 class="veg selected" query="1" title="Veg"><span>VeG</span></h2> 
+          <h2 class="nonveg" query="2" title="Non Veg"><span>NonVeG</span></h2> 
           <h2 class="satire" query="3" title="Satire"><span>Satire</span></h2> 
           <h2 class="political" query="4" title="Political"><span>Political</span></h2> 
           <h2 class="recent" query="5" title="Recent"><span>Recent</span>
           <h2 class="random" query="6" title="Random"><span>Random</span></span></h2>
-          <a id="loadphoto" class="btn btn-large btn-primary" href="javascript:;">Streamer</a>
         </div>
+        <div id="slideshow-btn" class="photo">
+          <button id="start-slideshow" class="btn btn-large btn-success" data-slideshow="5000" data-target="#modal-gallery" data-selector="#gallery a[rel=gallery]">Start Slideshow</button>
+        </div>
+        
         <div id="credits">
           <p> 
           based on <a class="veg" href="http://twitter.com/">twitter</a>.
@@ -72,7 +79,19 @@
       </div>
       <div class="span10">
         <div id="itemsWrapper">
-          <div id="items"><li class="satire"><em>KhattaStream..!</em><br /></li>
+          <div class ="" id="items"><li class="satire"><em>KhattaStream..!</em><br /></li>
+          </div>
+          <div id="photos" class="photo hide">
+            <div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery" data-delegator="#gallery">
+              <!-- why make an ajax call when we have php to our service! -->
+              <ul>
+              <?php require_once 'gallery.php';
+                  echo listdir();
+              ?>
+              </ul>
+              
+            </div>
+            <br />
           </div>
         </div>
       </div>

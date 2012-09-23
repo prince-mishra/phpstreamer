@@ -3,6 +3,7 @@ if (typeof(KC.photo === 'undefined')) {
 }
 KC.photo = {
 		init : function() {
+			$('.photo').show('slow');
 			$('#start-slideshow').button().click(function () {
 		        var options = $(this).data(),
 		            modal = $(options.target),
@@ -19,7 +20,7 @@ KC.photo = {
 		        modal.modal(options);
 		    });
 		    // Load images via flickr for demonstration purposes:
-		    $.ajax({
+		    /*$.ajax({
 		        url: 'http://api.flickr.com/services/rest/',
 		        data: {
 		            format: 'json',
@@ -40,6 +41,9 @@ KC.photo = {
 		                .prop('title', photo.title)
 		                .appendTo(gallery);
 		        });
-		    });
+		    });*/
+		},
+		kill : function() {
+			$('.photo').hide();
 		}
 }
